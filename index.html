@@ -8,7 +8,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>Sudoku</h1>
+        <header class="header">
+            <h1>Sudoku</h1>
+            <div class="version-badge">v1.2.0 <span class="release-date">Jun 26, 2026</span></div>
+        </header>
+
         <div class="controls">
             <select id="difficulty" aria-label="Difficulty level">
                 <option value="easy">Easy</option>
@@ -18,7 +22,31 @@
             <button onclick="newGame()">New Game</button>
             <button onclick="checkSolution()">Check</button>
             <button onclick="solvePuzzle()">Solve</button>
+            <button onclick="toggleThemePanel()" class="btn-theme" aria-label="Theme settings">🎨</button>
         </div>
+
+        <!-- Theme Panel -->
+        <div class="theme-panel" id="themePanel" hidden>
+            <div class="theme-presets">
+                <button class="preset-btn" onclick="applyPreset('midnight')" title="Midnight">🌙</button>
+                <button class="preset-btn" onclick="applyPreset('ocean')" title="Ocean">🌊</button>
+                <button class="preset-btn" onclick="applyPreset('forest')" title="Forest">🌲</button>
+                <button class="preset-btn" onclick="applyPreset('sunset')" title="Sunset">🌅</button>
+                <button class="preset-btn" onclick="applyPreset('lavender')" title="Lavender">💜</button>
+            </div>
+            <details class="custom-theme">
+                <summary>Custom Colors</summary>
+                <div class="color-inputs">
+                    <label>Background <input type="color" id="customBg" value="#2b2d31"></label>
+                    <label>Container <input type="color" id="customContainer" value="#313338"></label>
+                    <label>Cells <input type="color" id="customCell" value="#383a40"></label>
+                    <label>Accent <input type="color" id="customAccent" value="#5865f2"></label>
+                    <label>Text <input type="color" id="customText" value="#dcddde"></label>
+                </div>
+                <button onclick="applyCustomTheme()">Apply Custom</button>
+            </details>
+        </div>
+
         <div class="board" id="board" role="grid" aria-label="Sudoku board"></div>
         <div class="numpad" id="numpad" aria-label="Number pad"></div>
         <div class="status" id="status" aria-live="polite"></div>
