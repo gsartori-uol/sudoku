@@ -12,14 +12,17 @@ body {
     min-height: 100vh;
     background: #2b2d31;
     color: #dcddde;
+    padding: 10px;
 }
 
 .container {
     text-align: center;
     background: #313338;
-    padding: 30px;
+    padding: 20px;
     border-radius: 16px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    width: fit-content;
 }
 
 h1 {
@@ -62,9 +65,10 @@ select {
 }
 
 .board {
+    --cell-size: min(50px, calc((100vw - 80px) / 9));
     display: inline-grid;
-    grid-template-columns: repeat(9, 50px);
-    grid-template-rows: repeat(9, 50px);
+    grid-template-columns: repeat(9, var(--cell-size));
+    grid-template-rows: repeat(9, var(--cell-size));
     gap: 1px;
     background: #4e5058;
     border: 3px solid #5865f2;
@@ -73,12 +77,12 @@ select {
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
+    width: var(--cell-size);
+    height: var(--cell-size);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem;
+    font-size: clamp(0.9rem, 3.5vw, 1.3rem);
     font-weight: bold;
     background: #383a40;
     cursor: pointer;
@@ -124,15 +128,18 @@ select {
 .numpad {
     margin-top: 15px;
     display: flex;
-    gap: 8px;
+    gap: 6px;
     justify-content: center;
     flex-wrap: wrap;
+    max-width: calc(var(--cell-size, 50px) * 9 + 20px);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .numpad button {
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
+    width: clamp(36px, 9vw, 45px);
+    height: clamp(36px, 9vw, 45px);
+    font-size: clamp(1rem, 3vw, 1.2rem);
     border-radius: 50%;
     padding: 0;
 }
@@ -148,4 +155,35 @@ select {
     margin-top: 10px;
     font-size: 1.1rem;
     color: #949ba4;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+    }
+
+    .controls {
+        gap: 6px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    select {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+
+    .status {
+        font-size: 0.85rem;
+    }
+
+    .timer {
+        font-size: 0.95rem;
+    }
 }
